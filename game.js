@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const clueDisplay = document.getElementById('displayClue');
     const gridJugadores = document.getElementById('gridJugadores');
     const overlayCard = document.getElementById('overlayCard');
     const displayCategory = document.getElementById('displayCategory');
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (esImpostor) {
                     displayWord.textContent = "IMPOSTOR";
                     displayWord.classList.add('impostor-text');
+                    clueDisplay.textContent = 'Tu Pista: ' + clue;
                 } else {
                     displayWord.textContent = currentSecret.word;
                     displayWord.classList.remove('impostor-text');
@@ -119,3 +121,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnNextRound.addEventListener('click', startRound);
 });
+
