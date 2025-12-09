@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayCategory = document.getElementById('displayCategory');
     const displayWord = document.getElementById('displayWord');
     const btnCloseOverlay = document.getElementById('btnCloseOverlay');
-    
+
     const btnRevealImpostor = document.getElementById('btnRevealImpostor');
     const impostorNameDisplay = document.getElementById('impostorNameDisplay');
     const btnNextRound = document.getElementById('btnNextRound');
@@ -35,17 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const startRound = () => {
         gridJugadores.innerHTML = '';
-        
+        let cardsClickedCount = 0;
+        document.querySelector('.mostrarComienzo').innerHTML = '';
+
         btnRevealImpostor.classList.remove('revealed');
         btnRevealImpostor.style.pointerEvents = 'auto';
-        btnRevealImpostor.style.color = '#dc3545'; 
-        
+        btnRevealImpostor.style.color = '#dc3545';
+
         impostorNameDisplay.style.display = 'none';
         impostorNameDisplay.textContent = '';
-        btnNextRound.style.display = 'none';
 
         const randomIndex = Math.floor(Math.random() * playersData.length);
-        
+
         const currentPlayers = playersData.map((player, index) => {
             return {
                 ...player,
@@ -60,17 +61,24 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPlayers.forEach(player => {
             const divCol = document.createElement('div');
             divCol.className = 'col-12 col-sm-6 col-md-4 mb-4';
-            
+
             divCol.innerHTML = `
                 <div class="card card-player shadow-sm h-100 text-center p-3" data-rol="${player.rol}">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                        <h3 class="card-title fw-bold text-dark">${player.nombre}</h3>
-                        <p class="text-muted small mb-0">Toca para ver tu palabra</p>
+                        <h3 class="card-title fw-bold">${player.nombre}</h3>
+                        <p class="small mb-0">Toca para ver tu palabra</p>
                     </div>
                 </div>
             `;
 
-            divCol.querySelector('.card-player').addEventListener('click', function() {
+            cardsClickedCount++;
+
+            if (cardsClickedCount === currentPlayers.length) {
+                const randomStarter = currentPlayers[Math.floor(Math.random() * currentPlayers.length)];
+                document.querySelector('.mostrarComienzo').innerHTML = `<h1>EMPIEZA ${randomStarter.nombre.toUpperCase()}</h1>`;
+            }
+
+            divCol.querySelector('.card-player').addEventListener('click', function () {
                 if (this.classList.contains('clicked-card')) return;
 
                 const esImpostor = parseInt(this.getAttribute('data-rol')) === 1;
@@ -86,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 overlayCard.style.display = 'flex';
-                
+
                 this.classList.add('clicked-card');
                 this.querySelector('p').textContent = 'Visto';
             });
@@ -98,11 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
     btnRevealImpostor.addEventListener('click', () => {
         btnRevealImpostor.classList.add('revealed');
         btnRevealImpostor.style.color = '#000000';
-        
+
         impostorNameDisplay.innerHTML = `El impostor era: <span class="text-danger">${currentImpostorName}</span>`;
         impostorNameDisplay.style.display = 'block';
-        
-        btnNextRound.style.display = 'block';
+
         btnRevealImpostor.style.pointerEvents = 'none';
     });
 
