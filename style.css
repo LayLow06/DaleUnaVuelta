@@ -1,14 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans:wght@300;400;600&display=swap');
+
 body {
-    background-color: #f8f9fa;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Fira Sans', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .card-title, .btn {
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+h4, label, h1 {
+    color: white;
+}
+
+h1 {
+    font-size: 4rem;
+    color: #ffffff;
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    text-shadow: 0 0 20px #7b2cbf;
+}
+
+.form-control {
+    background-color: #10002b;
+    border: 2px solid #3c096c;
+    color: #ffffff;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.form-control:focus {
+    background-color: #000;
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 0 15px #9d4edd;
+}
+
+.form-control::placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.card {
+    background-color: #10002b;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #9d4edd;
+    transition: all 0.4s ease-out;
+}
+
+.card-player {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    background: linear-gradient(145deg, #10002b 0%, #000000 100%);
+    border: 2px solid #5a189a;
+}
+
+.card-player:hover {
+    transform: scale(1.05) translateY(-5px);
+    border-color: #ffffff;
+    box-shadow: 
+        0 0 20px #9d4edd,
+        0 0 40px #9d4edd;
+    z-index: 10;
+}
+
+.card-player h3 {
+    color: #ffffff;
+    font-size: 2.5rem;
+}
+
+.card-player p {
+    color: #ffffff;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.clicked-card {
+    border-color: #333 !important;
+    background: #050505 !important;
+    opacity: 1;
+    transform: scale(0.95) !important;
+    box-shadow: none !important;
+}
+
+.btn {
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-size: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.btn-primary {
+    background-color: #7b2cbf;
+    border: 2px solid #7b2cbf;
+    color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background-color: #000;
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 0 20px #7b2cbf;
+}
+
+.btn-success {
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.btn-success:hover {
+    background-color: #333333;
+    color: #ffffff;
+    box-shadow: 0 0 25px #ffffff;
+    transform: scale(1.02);
+}
+
+.btn-outline-danger {
+    color: #ff4d6d;
+    border-color: #ff4d6d;
+}
+
+.btn-outline-danger:hover {
+    background-color: #ff4d6d;
+    color: #ffffff;
+    box-shadow: 0 0 20px #ff4d6d;
+}
+
+#btnRevealImpostor {
+    font-family: 'Bebas Neue';
+    font-size: 6rem;
+    color: #ffffff;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    background-color: #000;
+    box-shadow: 0 0 10px #ffffff;
+}
+
+#btnRevealImpostor:hover {
+    transform: rotate(15deg) scale(1.1);
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0 0 50px #ffffff;
+}
+
+#btnRevealImpostor.revealed {
+    border-color: #ff0000;
+    color: #ff0000;
+    background: transparent;
+    box-shadow: 0 0 30px #ff0000;
+}
+
+#impostorNameDisplay {
+    font-size: 2.5rem;
+    font-family: 'Bebas Neue';
+    margin-top: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ff0000;
+    animation: fadeIn 1s ease-in;
 }
 
 #overlayCard {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
     z-index: 9999;
     display: none;
     justify-content: center;
@@ -16,92 +194,71 @@ body {
     flex-direction: column;
 }
 
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 3rem;
-    color: white;
-    cursor: pointer;
-    z-index: 10000;
-}
-
 .info-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 500px;
+    background-color: #10002b;
+    padding: 3rem 5rem;
+    border: 4px solid #ffffff;
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 0 50px rgba(255,255,255,0.2);
+    box-shadow: 
+        0 0 0 10px #000,
+        0 0 60px #7b2cbf;
+    position: relative;
+    max-width: 90%;
+    animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .category-text {
     font-size: 1.5rem;
-    color: #6c757d;
+    color: #ffffff;
+    font-family: 'Fira Sans', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
+    letter-spacing: 3px;
 }
 
 .word-text {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #212529;
+    font-family: 'Bebas Neue';
+    font-size: 5rem;
+    color: #ffffff;
+    text-shadow: 0 0 30px #ffffff;
+    margin-top: 10px;
 }
 
 .impostor-text {
-    color: #dc3545; 
+    color: #ff0000 !important;
+    text-shadow: 0 0 30px #ff0000 !important;
 }
 
-.card-player {
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 4rem;
+    color: #ffffff;
     cursor: pointer;
-    transition: transform 0.2s;
-    border: none;
+    line-height: 0.5;
+    transition: transform 0.3s;
 }
 
-.card-player:hover {
-    transform: translateY(-5px);
+.close-btn:hover {
+    color: #ff0000;
+    transform: scale(1.2) rotate(90deg);
 }
 
-.clicked-card {
-    background-color: #e9ecef !important;
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.reveal-section {
-    margin-top: 50px;
-    text-align: center;
-}
-
-#btnRevealImpostor {
-    font-size: 5rem;
-    font-weight: bold;
-    color: #dc3545; 
-    cursor: pointer;
-    transition: color 0.3s;
-    user-select: none;
-    line-height: 1;
-}
-
-#btnRevealImpostor.revealed {
-    color: #000000; 
-}
-
-#impostorNameDisplay {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 10px;
-    display: none;
-    animation: fadeIn 1s;
-}
-
-#btnNextRound {
-    display: none;
+@keyframes zoomIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 3rem; }
+    .word-text { font-size: 3rem; }
+    .info-card { padding: 2rem; width: 85%; }
+    .btn { width: 100%; margin-bottom: 10px; }
+    #gridJugadores .col-12 { padding-bottom: 10px; }
 }
