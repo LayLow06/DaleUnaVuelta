@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="card-body">
-                            <h5 class="card-title text-primary">Jugador ${i}</h5>
+                            <h4>Jugador ${i}</h4>
                             <div class="mb-3">
                                 <label for="nombreJugador${i}" class="form-label">Nombre:</label>
                                 <input type="text" 
