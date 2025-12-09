@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (esImpostor) {
                     displayWord.textContent = "IMPOSTOR";
                     displayWord.classList.add('impostor-text');
-                    clueDisplay.textContent = 'Tu Pista: ' + .hint;
+                    clueDisplay.textContent = 'Tu Pista: ' + currentSecret.hint;
                 } else {
                     displayWord.textContent = currentSecret.word;
                     displayWord.classList.remove('impostor-text');
