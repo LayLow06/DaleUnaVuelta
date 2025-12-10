@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     displayWord.textContent = currentSecret.word;
                     displayWord.classList.remove('impostor-text');
+                    clueDisplay.textContent = '';
                 }
 
                 overlayCard.style.display = 'flex';
@@ -121,5 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnNextRound.addEventListener('click', startRound);
 });
+
 
 
